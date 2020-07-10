@@ -17,8 +17,6 @@ def print_menu(title, list_options):
 
     print("(0) Exit program")
 
-    pass
-
 
 def print_message(message):
     """Prints a single message to the terminal.
@@ -26,7 +24,7 @@ def print_message(message):
     Args:
         message: str - the message
     """
-    pass
+    print(message)
 
 
 def print_general_results(result, label):
@@ -35,7 +33,17 @@ def print_general_results(result, label):
     lists/tuples (like "@label: \n  @item1; @item2"), and dictionaries
     (like "@label \n  @key1: @value1; @key2: @value2")
     """
-    pass
+    
+    if isinstance(result, int):
+        print(f"{label}: {result}")
+    elif isinstance(result, float):
+        print(f"{label}: {result:.2f}")
+    elif isinstance(result, list) or isinstance(result, tuple):
+        print(f"{label}:")
+        print("; ".join(map(str, result)))
+    elif isinstance(result, dict):
+        print(f"{label}:")
+        print("; ".join(list(map(lambda element : ": ".join(map(str, element)), list(result.items())))))
 
 
 # /--------------------------------\
