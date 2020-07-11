@@ -4,7 +4,17 @@ from view import terminal as view
 
 def list_customers():
     # view.print_error_message("Not implemented yet.")
-    view.print_table(crm.get_customers())
+    customers = crm.get_customers()
+    for index, customer in enumerate(customers):
+        customers[index].insert(0, str(index + 1))
+
+    header = crm.HEADERS
+    header.insert(0, "lp")
+    header = list(map(lambda element : element.capitalize(), header))
+    
+    customers.insert(0, header)
+    
+    view.print_table(customers)
 
 
 def add_customer():
