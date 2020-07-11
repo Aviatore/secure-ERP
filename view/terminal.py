@@ -36,14 +36,20 @@ def print_general_results(result, label):
     
     if isinstance(result, int):
         print(f"{label}: {result}")
+        
     elif isinstance(result, float):
         print(f"{label}: {result:.2f}")
+        
     elif isinstance(result, list) or isinstance(result, tuple):
         print(f"{label}:")
         print("; ".join(map(str, result)))
+        
     elif isinstance(result, dict):
+        result_dict_pairs = list(result.items())
+        result_dict_pairs_colon_sep = list(map(lambda element : ": ".join(map(str, element)), result_dict_pairs))
+        
         print(f"{label}:")
-        print("; ".join(list(map(lambda element : ": ".join(map(str, element)), list(result.items())))))
+        print("; ".join(result_dict_pairs_colon_sep))
 
 
 # /--------------------------------\
@@ -61,22 +67,39 @@ def print_table(table):
     """
     # Create a list with max lengths of column elements
     max_col_len = list(map(len, table[0]))
+    
     for line_index, line in enumerate(table):
+        
         for element_index, element in enumerate(line):
+            
             if max_col_len[element_index] < len(element):
                 max_col_len[element_index] = len(element)
     
+    
     # Create a table line that matches the lengths of column elements
     table_line = ""
+    
     for index, col_len in enumerate(max_col_len):
         table_line += "-" * (col_len + 2)
+        
         if index < len(table[0]) - 1:
             table_line += "+"
     
+    
     # Print the table
+    INDEX = 0
+    VALUE = 1
+    PADDING = 2 # A space between the value and a table cell wall
     print(table_line)
+    
     for index, line in enumerate(table):
-        print("|".join(map(lambda element : element[1].center(max_col_len[element[0]] + 2), enumerate(line))))
+        
+        # The first line is treated as a header which is capitalized
+        if index == 0:
+            line = list(map(lambda element : element.capitalize(), line))
+            
+        print("|".join(map(lambda element : element[VALUE].center(max_col_len[ element[INDEX] ] + PADDING), enumerate(line))))
+        
         if index == 0:
             print(table_line)
 
