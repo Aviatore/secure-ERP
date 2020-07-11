@@ -76,7 +76,11 @@ def print_table(table):
     # Print the table
     print(table_line)
     for index, line in enumerate(table):
+        if index == 0:
+            line = list(map(lambda element : element.capitalize(), line))
+            
         print("|".join(map(lambda element : element[1].center(max_col_len[element[0]] + 2), enumerate(line))))
+        
         if index == 0:
             print(table_line)
 
