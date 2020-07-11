@@ -59,7 +59,26 @@ def print_table(table):
     Args:
         table: list of lists - the table to print out
     """
-    pass
+    # Create a list with max lengths of column elements
+    max_col_len = list(map(len, table[0]))
+    for line_index, line in enumerate(table):
+        for element_index, element in enumerate(line):
+            if max_col_len[element_index] < len(element):
+                max_col_len[element_index] = len(element)
+    
+    # Create a table line that matches the lengths of column elements
+    table_line = ""
+    for index, col_len in enumerate(max_col_len):
+        table_line += "-" * (col_len + 2)
+        if index < len(table[0]) - 1:
+            table_line += "+"
+    
+    # Print the table
+    print(table_line)
+    for index, line in enumerate(table):
+        print("|".join(map(lambda element : element[1].center(max_col_len[element[0]] + 2), enumerate(line))))
+        if index == 0:
+            print(table_line)
 
 
 def get_input(label):
