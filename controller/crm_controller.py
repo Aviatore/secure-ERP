@@ -14,8 +14,9 @@ def add_customer():
 
 
 def update_customer():
-    view.print_error_message("Not implemented yet.")
-
+    # view.print_error_message("Not implemented yet.")
+    update_customer_data = view.get_inputs(crm.HEADERS[1:].insert(0, "lp"))
+    crm.update_customer(update_customer_data)
 
 def delete_customer():
     view.print_error_message("Not implemented yet.")

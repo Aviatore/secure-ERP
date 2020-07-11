@@ -18,12 +18,17 @@ data = data_manager.read_table_from_file(DATAFILE)
 def get_customers():
     return data
 
+
 def add_customer(new_customer):
     data.append(new_customer.insert(0, util.generate_id()))
     data_manager.write_table_to_file(DATAFILE, data)
     
-def update_customer(customer):
-    pass        
+    
+def update_customer(customer_to_update):
+    data_ids = list(range(len(data)))
+    data[data_ids.index(customer_to_update[0] - 1)] = customer_to_update
+    data_manager.write_table_to_file(DATAFILE, data)
+
 
 def delete_customer():
     pass
