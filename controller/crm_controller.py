@@ -9,7 +9,7 @@ def list_customers():
 
 def add_customer():
     # view.print_error_message("Not implemented yet.")
-    new_customer_data = view.get_inputs(crm.HEADERS)
+    new_customer_data = view.get_inputs(crm.HEADERS[1:])
     crm.add_customer(new_customer_data)
 
 

@@ -19,5 +19,14 @@ def get_customers():
     return data
 
 def add_customer(new_customer):
-    data.append(new_customer)
+    data.append(new_customer.insert(0, util.generate_id()))
     data_manager.write_table_to_file(DATAFILE, data)
+    
+def update_customer(customer):
+    pass        
+
+def delete_customer():
+    pass
+
+def get_subscribed_emails():
+    pass
