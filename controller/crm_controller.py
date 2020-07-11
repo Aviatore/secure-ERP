@@ -5,12 +5,12 @@ from view import terminal as view
 def list_customers():
     # view.print_error_message("Not implemented yet.")
     customers = crm.get_customers()
+    
     for index, customer in enumerate(customers):
         customers[index].insert(0, str(index + 1))
 
     header = crm.HEADERS
-    header.insert(0, "lp")
-    header = list(map(lambda element : element.capitalize(), header))
+    header.insert(0, "Lp")
     
     customers.insert(0, header)
     
@@ -23,10 +23,53 @@ def add_customer():
     crm.add_customer(new_customer_data)
 
 
+def save_cursor():
+    print("\033[s", end="")
+
+
+def restore_cursor():
+    print("\033[u", end="")
+    
+
+def clean_line():
+    print("\033[0K", end="")
+
+
 def update_customer():
     # view.print_error_message("Not implemented yet.")
-    update_customer_data = view.get_inputs(crm.HEADERS[1:].insert(0, "lp"))
-    crm.update_customer(update_customer_data)
+    
+    header = crm.HEADERS[1:]
+    header.insert(0, "Lp")
+    header = list(map(lambda element : element.capitalize(), header))
+    
+    update_customer_data = None
+    while update_customer_data is None:
+        print("")
+        update_customer_data = view.get_inputs(header)
+        
+        update_customer_data_table = [header, update_customer_data]
+        print("")
+        view.print_table(update_customer_data_table)
+        print("")
+        save_cursor()
+        user_input = None
+        while user_input is None:
+            restore_cursor()
+            clean_line()
+            
+            user_input = view.get_input("Are the above values correct? [y]es [n]o: ")
+
+            if len(user_input) == "":
+                user_input = None
+            elif len(user_input) > 1:
+                user_input = None
+            elif user_input not in ["y", "n"]:
+                user_input = None
+            elif user_input == "n":
+                update_customer_data = None
+            elif user_input == "y":
+                crm.update_customer(update_customer_data)
+            
 
 def delete_customer():
     view.print_error_message("Not implemented yet.")
