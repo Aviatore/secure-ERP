@@ -26,7 +26,7 @@ def add_customer(new_customer):
     
 def update_customer(customer_to_update):
     data_ids = list(range(len(data)))
-    data[data_ids.index(customer_to_update[0] - 1)] = customer_to_update
+    data[data_ids.index(int(customer_to_update[0]) - 1)][1:] = customer_to_update[1:]
     data_manager.write_table_to_file(DATAFILE, data)
 
 
