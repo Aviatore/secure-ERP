@@ -9,8 +9,10 @@ def list_customers():
     for index, customer in enumerate(customers):
         customers[index].insert(0, str(index + 1))
 
-    header = crm.HEADERS
-    header.insert(0, "Lp")
+    # header = crm.HEADERS
+    # header.insert(0, "Lp")
+    header = ["Lp"]
+    header.extend(crm.HEADERS)
     
     customers.insert(0, header)
     
@@ -38,8 +40,10 @@ def clean_line():
 def update_customer():
     # view.print_error_message("Not implemented yet.")
     
-    header = crm.HEADERS[1:]
-    header.insert(0, "Lp")
+    # header = crm.HEADERS[1:]
+    # header.insert(0, "Lp")
+    header = ["Lp"]
+    header.extend(crm.HEADERS[1:])
     header = list(map(lambda element : element.capitalize(), header))
     
     update_customer_data = None
@@ -59,7 +63,7 @@ def update_customer():
             
             user_input = view.get_input("Are the above values correct? [y]es [n]o: ")
 
-            if len(user_input) == "":
+            if user_input == "":
                 user_input = None
             elif len(user_input) > 1:
                 user_input = None
@@ -72,7 +76,25 @@ def update_customer():
             
 
 def delete_customer():
-    view.print_error_message("Not implemented yet.")
+    # view.print_error_message("Not implemented yet.")
+    customer_lp = None
+    
+    while customer_lp is None:
+        customer_lp = view.get_input("Provide the lp of the customer to delete or input [c] to cancel")
+        
+        if customer_lp == "":
+            customer_lp = None
+        elif not customer_lp.isdigit():
+            customer_lp = None
+            view.print_error_message("The customer lp must be a digit.")
+        elif customer_lp == "c":
+            pass
+        else:
+            try:
+                crm.delete_customer(customer_lp)
+            except IndexError:
+                view.print_error_message("Customer lp out of range.")
+                customer_lp = None
 
 
 def get_subscribed_emails():
