@@ -15,8 +15,20 @@ HEADERS = ["id", "name", "email", "subscribed"]
 
 data = data_manager.read_table_from_file(DATAFILE)
 
+
+def copy_list(data):
+    new_list = []
+    for line in data:
+        tmp = []
+        for element in line:
+            tmp.append(element)
+        new_list.append(tmp)
+    return new_list
+
+
 def get_customers():
-    return data
+    new_data = copy_list(data)
+    return new_data
 
 
 def add_customer(new_customer):
@@ -30,8 +42,9 @@ def update_customer(customer_to_update):
     data_manager.write_table_to_file(DATAFILE, data)
 
 
-def delete_customer():
-    pass
+def delete_customer(customer_lp):
+    data.pop(int(customer_lp) - 1)
+    data_manager.write_table_to_file(DATAFILE, data)
 
 def get_subscribed_emails():
     pass
