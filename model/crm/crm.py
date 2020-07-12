@@ -16,6 +16,10 @@ HEADERS = ["id", "name", "email", "subscribed"]
 data = data_manager.read_table_from_file(DATAFILE)
 
 
+def get_entries_number():
+    return len(data)
+
+
 def copy_list(data):
     new_list = []
     for line in data:
@@ -32,7 +36,11 @@ def get_customers():
 
 
 def add_customer(new_customer):
-    data.append(new_customer.insert(0, util.generate_id()))
+    new_id = util.generate_id()
+    data_new_customer = [new_id]
+    data_new_customer.extend(new_customer)
+    data.append(data_new_customer)
+
     data_manager.write_table_to_file(DATAFILE, data)
     
     
