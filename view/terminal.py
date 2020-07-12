@@ -12,10 +12,10 @@ def print_menu(title, list_options):
         list_options (list): list of the menu options (listed starting from 1, 0th element goes to the end)
     """
     print(f"{title}:")
-    for index, option_name in enumerate(list_options):
+    for index, option_name in enumerate(list_options[1:]):
         print(f"({index + 1}) {option_name}")
 
-    print("(0) Exit program")
+    print(f"(0) {list_options[0]}")
 
 
 def print_message(message):
