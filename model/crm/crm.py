@@ -47,4 +47,9 @@ def delete_customer(customer_lp):
     data_manager.write_table_to_file(DATAFILE, data)
 
 def get_subscribed_emails():
-    pass
+    emails = []
+    
+    for customer in data:
+        emails.append(customer[2])
+    
+    return emails
