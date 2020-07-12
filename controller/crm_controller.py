@@ -42,6 +42,12 @@ def update_customer():
     
     # header = crm.HEADERS[1:]
     # header.insert(0, "Lp")
+    entries_number = crm.get_entries_number()
+    
+    if entries_number == 0:
+        view.print_error_message("There is no entries to update.")
+        return
+    
     header = ["Lp"]
     header.extend(crm.HEADERS[1:])
     header = list(map(lambda element : element.capitalize(), header))
@@ -50,6 +56,10 @@ def update_customer():
     while update_customer_data is None:
         print("")
         update_customer_data = view.get_inputs(header)
+        
+        if update_customer_data[0] not in range(1, entries_number + 1):
+            view.print_error_message(f"The Lp number must be in the range between: {1} and {entries_number}")
+            continue
         
         update_customer_data_table = [header, update_customer_data]
         print("")
