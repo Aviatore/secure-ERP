@@ -10,7 +10,7 @@ def capitalize_list_elements(data):
 
 def list_customers():
     # view.print_error_message("Not implemented yet.")
-    view.print_message("\nThe list of customers:")
+    view.print_message("The list of customers:")
     customers = crm.get_customers()
     
     for index, customer in enumerate(customers):
@@ -28,7 +28,7 @@ def list_customers():
 
 def add_customer():
     # view.print_error_message("Not implemented yet.")
-    view.print_message("\nPlease, provide the new customer's data:")
+    view.print_message("Please, provide the new customer's data:")
     headers = capitalize_list_elements(crm.HEADERS[1:])
     new_customer_data = view.get_inputs(headers)
 
@@ -56,7 +56,7 @@ def get_customer_lp(action_type):
         view.print_error_message("There is no entries to update.")
         return
     
-    customer_lp = view.get_input(f"\nPlease, provide the Lp number of the customer whose data you want to {action_type} or [c] to cancel")
+    customer_lp = view.get_input(f"Please, provide the Lp number of the customer whose data you want to {action_type} or [c] to cancel")
     
     if customer_lp == "":
         msg = "You must provide a digit."
@@ -84,7 +84,7 @@ def update_customer():
     if customer_lp is None:
         return
     
-    view.print_message("\nPlease, provide updated customer's data.")
+    view.print_message("Please, provide updated customer's data.")
     view.print_message("Press ENTER if you want to keep the value.")
     
     header = crm.HEADERS[NAME_INDEX:]
@@ -142,7 +142,7 @@ def delete_customer():
 def get_subscribed_emails():
     # view.print_error_message("Not implemented yet.")
     emails = crm.get_subscribed_emails()
-    view.print_general_results(emails, "\nSubscribed emails")
+    view.print_general_results(emails, "Subscribed emails")
 
 
 def run_operation(option):
