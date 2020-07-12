@@ -11,6 +11,7 @@ def print_menu(title, list_options):
         title (str): the title of the menu (first row)
         list_options (list): list of the menu options (listed starting from 1, 0th element goes to the end)
     """
+    print("")
     print(f"{title}:")
     for index, option_name in enumerate(list_options[1:]):
         print(f"({index + 1}) {option_name}")
@@ -24,6 +25,7 @@ def print_message(message):
     Args:
         message: str - the message
     """
+    print("")
     print(message)
 
 
@@ -33,6 +35,7 @@ def print_general_results(result, label):
     lists/tuples (like "@label: \n  @item1; @item2"), and dictionaries
     (like "@label \n  @key1: @value1; @key2: @value2")
     """
+    print("")
     
     if isinstance(result, int):
         print(f"{label}: {result}")
@@ -90,6 +93,7 @@ def print_table(table):
     INDEX = 0
     VALUE = 1
     PADDING = 2 # A space between the value and a table cell wall
+    print("")
     print(table_line)
     
     for index, line in enumerate(table):
@@ -110,6 +114,8 @@ def get_input(label):
     Args:
         label: str - the label before the user prompt
     """
+    print("")
+    
     return input(f"{label}: ")
 
 
@@ -119,7 +125,9 @@ def get_inputs(labels):
     Args:
         labels: list - the list of the labels to be displayed before each prompt
     """
+    print("")
     user_inputs = []
+    
     for label in labels:
         user_inputs.append(get_input(label))
     
@@ -132,4 +140,5 @@ def print_error_message(message):
     Args:
         message: str - the error message
     """
+    print("")
     print(f"Error! {message}")
