@@ -61,7 +61,7 @@ def update_customer():
             restore_cursor()
             clean_line()
             
-            user_input = view.get_input("Are the above values correct? [y]es [n]o: ")
+            user_input = view.get_input("Are the above values correct? [y]es [n]o")
 
             if user_input == "":
                 user_input = None
@@ -98,7 +98,9 @@ def delete_customer():
 
 
 def get_subscribed_emails():
-    view.print_error_message("Not implemented yet.")
+    # view.print_error_message("Not implemented yet.")
+    emails = crm.get_subscribed_emails()
+    view.print_general_results(emails, "Subscribed emails")
 
 
 def run_operation(option):
