@@ -1,11 +1,7 @@
 from model import data_manager, util
 
 
-def function_get_entries_number(data):
-    return len(data)
-
-
-def copy_list(data):
+def copy_nested_list(data):
     new_list = []
     for line in data:
         tmp = []
@@ -16,7 +12,7 @@ def copy_list(data):
 
 
 def function_get(data):
-    new_data = copy_list(data)
+    new_data = copy_nested_list(data)
     return new_data
 
 
