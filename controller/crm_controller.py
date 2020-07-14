@@ -1,13 +1,17 @@
 from model.crm import crm
 from view import terminal as view
+from model import crud
+from controller import crud_controller
 
 
 def list_customers():
-    view.print_error_message("Not implemented yet.")
+    # view.print_error_message("Not implemented yet.")
+    crud_controller.read(crm.data_manager.read_table_from_file(crm.DATAFILE), crm.HEADERS, crud.function_get, "The list of customers:")
 
 
 def add_customer():
-    view.print_error_message("Not implemented yet.")
+    # view.print_error_message("Not implemented yet.")
+    crud_controller.create(crm.data_manager.read_table_from_file(crm.DATAFILE), crm.DATAFILE, crm.HEADERS, "Add a customer:", crud.function_add)
 
 
 def update_customer():
