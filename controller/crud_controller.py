@@ -1,4 +1,6 @@
 from view import terminal as view
+from model import crud
+
 
 
 def save_cursor():
@@ -13,7 +15,11 @@ def clean_line():
     print("\033[0K", end="")
 
 
-def get_data_lp(data, function_get_entries_number, action_type, msg):   
+def function_get_entries_number(data):
+    return len(data)
+
+
+def get_data_lp(data, action_type, msg=None):   
     entries_number = function_get_entries_number(data)
     
     if entries_number == 0:
@@ -44,18 +50,18 @@ def capitalize_list_elements(data):
     return list(map(lambda element : element.capitalize(), data))
 
 
-def create(data, data_file, headers, label, function_add):
+def create(data, data_file, headers, label):
     # view.print_error_message("Not implemented yet.")
     view.print_message(f"{label}:")
     headers = capitalize_list_elements(headers[1:])
     new_data = view.get_inputs(headers)
 
-    function_add(data, data_file, new_data)
+    crud.function_add(data, data_file, new_data)
 
 
-def read(data, headers, function_get, label):
+def read(data, headers, label):
     view.print_message(f"{label}:")
-    data = function_get(data)
+    data = crud.function_get(data)
     number_of_elements = len(data)
     
     for index in range(number_of_elements):
@@ -69,11 +75,20 @@ def read(data, headers, function_get, label):
     view.print_table(data)
 
 
-def update(data, data_file, headers, label, function_get_entries_number, function_get, function_update, msg):
+def copy_list(data):
+    new_list = []
+
+    for line in data:
+        new_list.append(line)
+
+    return new_list
+
+
+def update(data, data_file, headers, label, msg=None):
     NAME_INDEX = 1
     
-    old_data = function_get(data)
-    data_lp = get_data_lp(data, function_get_entries_number, "update", msg)
+    old_data = crud.function_get(data)
+    data_lp = get_data_lp(data, "update", msg)
     if data_lp is None:
         return
     
@@ -81,21 +96,22 @@ def update(data, data_file, headers, label, function_get_entries_number, functio
     view.print_message("Press ENTER if you want to keep the value.")
     
     header = headers[NAME_INDEX:]
-    header = capitalize_list_elements(header)
+    header_capitalized = capitalize_list_elements(header)
     
     for index, customer_data in enumerate(old_data[data_lp - 1][NAME_INDEX:]):
-        header[index] += f" ({customer_data})"
+        header_capitalized[index] += f" ({customer_data})"
     
     update_data = None
     while update_data is None:
-        print("")
-        update_data = [str(data_lp)]
-        update_data.extend(view.get_inputs(header))
+        header = headers[NAME_INDEX:]
+
+        update_data = view.get_inputs(header_capitalized)
         
         for index, value in enumerate(update_data):
             if value == "":
                 update_data[index] = old_data[data_lp - 1][index + NAME_INDEX]
         
+        update_data.insert(0, str(data_lp))
         header.insert(0, "Lp")
         update_data_table = [header, update_data]
         print("")
@@ -118,13 +134,13 @@ def update(data, data_file, headers, label, function_get_entries_number, functio
             elif user_input == "n":
                 update_data = None
             elif user_input == "y":
-                function_update(data, data_file, update_data)
+                crud.function_update(data, data_file, update_data)
 
 
-def delete(data, data_file, function_get_entries_number, function_delete, msg):
-    data_lp = get_data_lp(data, function_get_entries_number, "delete", msg)
+def delete(data, data_file, msg=None):
+    data_lp = get_data_lp(data, "delete", msg)
     
     if data_lp is None:
         return
     
-    function_delete(data, data_file, data_lp)
+    crud.function_delete(data, data_file, data_lp)
