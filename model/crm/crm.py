@@ -58,6 +58,7 @@ def get_subscribed_emails():
     emails = []
     
     for customer in data:
-        emails.append(customer[2])
+        if customer[3] == "1":
+            emails.append(customer[2])
     
     return emails
