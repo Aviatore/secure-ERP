@@ -1,25 +1,29 @@
 from model.crm import crm
 from view import terminal as view
+from controller import crud_controller
 
+
+msg = [""]
 
 def list_customers():
-    view.print_error_message("Not implemented yet.")
+    crud_controller.read(crm.data, crm.HEADERS, "The list of customers")
 
 
 def add_customer():
-    view.print_error_message("Not implemented yet.")
+    crud_controller.create(crm.data, crm.DATAFILE, crm.HEADERS, "Please, provide the new customer's data")
 
 
 def update_customer():
-    view.print_error_message("Not implemented yet.")
+    crud_controller.update(crm.data, crm.DATAFILE, crm.HEADERS, "Please, provide updated customer's data", msg)
 
 
 def delete_customer():
-    view.print_error_message("Not implemented yet.")
+    crud_controller.delete(crm.data, crm.DATAFILE, msg)
 
 
 def get_subscribed_emails():
-    view.print_error_message("Not implemented yet.")
+    emails = crm.get_subscribed_emails()
+    view.print_general_results(emails, "Subscribed emails")
 
 
 def run_operation(option):
@@ -50,9 +54,17 @@ def display_menu():
 
 
 def menu():
+    global msg
+
     operation = None
     while operation != '0':
         display_menu()
+        
+        if msg[0] != "":
+            print("")
+            print(msg[0])
+            msg[0] = ""
+
         try:
             operation = view.get_input("Select an operation")
             run_operation(int(operation))
