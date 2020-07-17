@@ -72,3 +72,26 @@ def get_average_age():
     average_age = sum(age) / len(age)
 
     return average_age
+
+
+def count_employees_with_clearance():
+    data = crud.read(DATAFILE)
+    clearance = []
+
+    for employees in data:
+        clearance.append(int(employees[4]))
+
+    lvl = None
+
+    cl_lvl = [0, 1, 2, 3, 4, 5, 6, 7]
+
+    while lvl not in cl_lvl:
+        lvl = int(input("\nPlease insert clearance level from 0 (lowest) to 7 (highest):  "))
+
+    number_of_employees = 0
+
+    for i in range(len(clearance)):
+        if clearance[i] >= lvl:
+            number_of_employees += 1
+
+    return number_of_employees
