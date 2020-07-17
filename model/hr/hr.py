@@ -50,6 +50,8 @@ def get_oldest_and_youngest():
             youngest = birthday[i]
             youngest_name = names[i]
 
-    return oldest_name, youngest_name
+    old_and_young = tuple((oldest_name, youngest_name))
+
+    return old_and_young
 
 
