@@ -53,19 +53,19 @@ def capitalize_list_elements(data):
     return list(map(lambda element : element.capitalize(), data))
 
 
-def create(data, data_file, headers, label):
+def create(data_file, headers, label):
     view.print_message(f"{label}:")
 
     headers = capitalize_list_elements(headers[1:])
     new_data = view.get_inputs(headers)
 
-    crud.function_add(data, data_file, new_data)
+    crud.create(data_file, new_data)
 
 
-def read(data, headers, label):
+def read(data_file, headers, label):
     view.print_message(f"{label}:")
 
-    data = crud.function_get(data)
+    data = crud.read(data_file)
     number_of_elements = len(data)
     
     for index in range(number_of_elements):
@@ -88,11 +88,11 @@ def copy_list(data):
     return new_list
 
 
-def update(data, data_file, headers, label, msg=[""]):
+def update(data_file, headers, label, msg=[""]):
     NAME_INDEX = 1
     
-    old_data = crud.function_get(data)
-    data_lp = get_data_lp(data, "update", msg)
+    old_data = crud.read(data_file)
+    data_lp = get_data_lp(old_data, "update", msg)
 
     if data_lp is None:
         return
@@ -144,13 +144,15 @@ def update(data, data_file, headers, label, msg=[""]):
             elif user_input == "n":
                 update_data = None
             elif user_input == "y":
-                crud.function_update(data, data_file, update_data)
+                crud.update(data_file, update_data)
 
 
-def delete(data, data_file, msg=[""]):
+def delete(data_file, msg=[""]):
+    data = crud.read(data_file)
+
     data_lp = get_data_lp(data, "delete", msg)
     
     if data_lp is None:
         return
     
-    crud.function_delete(data, data_file, data_lp)
+    crud.delete(data_file, data_lp)
