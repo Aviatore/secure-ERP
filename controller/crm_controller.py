@@ -6,19 +6,19 @@ from controller import crud_controller
 msg = [""]
 
 def list_customers():
-    crud_controller.read(crm.data, crm.HEADERS, "The list of customers")
+    crud_controller.read(crm.DATAFILE, crm.HEADERS, "The list of customers:")
 
 
 def add_customer():
-    crud_controller.create(crm.data, crm.DATAFILE, crm.HEADERS, "Please, provide the new customer's data")
+    crud_controller.create(crm.DATAFILE, crm.HEADERS, "Add a customer:")
 
 
 def update_customer():
-    crud_controller.update(crm.data, crm.DATAFILE, crm.HEADERS, "Please, provide updated customer's data", msg)
+    crud_controller.update(crm.DATAFILE, crm.HEADERS, "Update customer", msg)
 
 
 def delete_customer():
-    crud_controller.delete(crm.data, crm.DATAFILE, msg)
+    crud_controller.delete(crm.DATAFILE, msg)
 
 
 def get_subscribed_emails():
