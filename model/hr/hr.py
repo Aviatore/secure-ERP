@@ -14,17 +14,24 @@ DATAFILE = "model/hr/hr.csv"
 HEADERS = ["Id", "Name", "Date of birth", "Department", "Clearance"]
 
 
-def get_age():
+def get_year_of_birth():
     data = crud.read(DATAFILE)
 
     birthday = []
+    year_of_birth = []
 
     for employees in data:
-        birthday.append(employees[2])
+        birthday.append(list(employees[2]))
+        year_of_birth.append("0")
 
-    age = []
+    for i in range(len(birthday)):
+        for j in range(0, 4):
+            year_of_birth[i] += birthday[i][j]
 
-    return birthday
+    for i in range(len(year_of_birth)):
+        year_of_birth[i] = int(year_of_birth[i])
+
+    return year_of_birth
 
 
 def get_oldest_and_youngest():
@@ -55,3 +62,13 @@ def get_oldest_and_youngest():
     return old_and_young
 
 
+def get_average_age():
+    years = get_year_of_birth()
+    age = []
+
+    for i in range(len(years)):
+        age.append(2020 - years[i])
+
+    average_age = sum(age) / len(age)
+
+    return average_age

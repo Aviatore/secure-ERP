@@ -25,7 +25,8 @@ def get_oldest_and_youngest():
 
 
 def get_average_age():
-    view.print_error_message("Not implemented yet.")
+    age = hr.get_average_age()
+    view.print_general_results(age, "Average age of employees")
 
 
 def next_birthdays():
