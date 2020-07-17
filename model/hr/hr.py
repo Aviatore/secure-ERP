@@ -8,7 +8,14 @@ Data table structure:
     - clearance level (int): from 0 (lowest) to 7 (highest)
 """
 
-from model import data_manager, util
+from model import data_manager, util, crud
 
 DATAFILE = "model/hr/hr.csv"
 HEADERS = ["Id", "Name", "Date of birth", "Department", "Clearance"]
+
+
+def get_human_resources():
+    data = crud.read(DATAFILE)
+    employee_info = []
+
+    return employee_info

@@ -1,21 +1,22 @@
 from model.hr import hr
 from view import terminal as view
+from controller import crud_controller
 
 
 def list_employees():
-    view.print_error_message("Not implemented yet.")
+    crud_controller.read(hr.DATAFILE, hr.HEADERS, "The list of employees:")
 
 
 def add_employee():
-    view.print_error_message("Not implemented yet.")
+    crud_controller.create(hr.DATAFILE, hr.HEADERS, "Add a employee:")
 
 
 def update_employee():
-    view.print_error_message("Not implemented yet.")
+    crud_controller.update(hr.DATAFILE, hr.HEADERS, "Update employee", msg)
 
 
 def delete_employee():
-    view.print_error_message("Not implemented yet.")
+    crud_controller.delete(hr.DATAFILE, msg)
 
 
 def get_oldest_and_youngest():
