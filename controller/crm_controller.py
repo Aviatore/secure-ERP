@@ -7,22 +7,22 @@ msg = [""]
 
 def list_customers():
     # view.print_error_message("Not implemented yet.")
-    crud_controller.read(crm.data_manager.read_table_from_file(crm.DATAFILE), crm.HEADERS, "The list of customers:")
+    crud_controller.read(crm.DATAFILE, crm.HEADERS, "The list of customers:")
 
 
 def add_customer():
     # view.print_error_message("Not implemented yet.")
-    crud_controller.create(crm.data_manager.read_table_from_file(crm.DATAFILE), crm.DATAFILE, crm.HEADERS, "Add a customer:")
+    crud_controller.create(crm.DATAFILE, crm.HEADERS, "Add a customer:")
 
 
 def update_customer():
     # view.print_error_message("Not implemented yet.")
-    crud_controller.update(crm.data_manager.read_table_from_file(crm.DATAFILE), crm.DATAFILE, crm.HEADERS, "Update customer", msg)
+    crud_controller.update(crm.DATAFILE, crm.HEADERS, "Update customer", msg)
 
 
 def delete_customer():
     # view.print_error_message("Not implemented yet.")
-    crud_controller.delete(crm.data_manager.read_table_from_file(crm.DATAFILE), crm.DATAFILE, msg)
+    crud_controller.delete(crm.DATAFILE, msg)
 
 
 def get_subscribed_emails():
