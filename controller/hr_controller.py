@@ -2,6 +2,8 @@ from model.hr import hr
 from view import terminal as view
 from controller import crud_controller
 
+msg = [""]
+
 
 def list_employees():
     crud_controller.read(hr.DATAFILE, hr.HEADERS, "The list of employees:")
