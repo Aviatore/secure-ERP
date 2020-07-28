@@ -16,13 +16,8 @@ HEADERS = ["Id", "Customer", "Product", "Price", "Date"]
 
 def get_biggest_revenue_transaction():
     data = crud.read(DATAFILE)
-    revenue_transaction = []
-    revenue_transactions = []
-    for transaction in data:
-        revenue_transaction.append(list(transaction[3]))
-    for i in range(len(revenue_transaction)):
-        revenue_transactions.append(converter(revenue_transaction[i], float))
-    biggest_revenue_transaction = str(max(revenue_transactions))
+    prices = get_prices()
+    biggest_revenue_transaction = str(max(prices))
     for transaction in data:
         if biggest_revenue_transaction in transaction:
             return transaction
@@ -79,3 +74,53 @@ def values():
     for i in product_name:
         product_names.append("".join(i))
         return product_values
+
+
+def get_date():
+    data = crud.read(DATAFILE)
+    transaction_between = []
+    transactions_between = []
+    for transaction in data:
+        transaction_between.append(list(transaction[4]))
+    for i in range(len(transaction_between)):
+        transactions_between.append("".join(transaction_between[i]))
+    return transactions_between
+
+
+def get_prices():
+    data = crud.read(DATAFILE)
+    revenue_transaction = []
+    revenue_transactions = []
+    for transaction in data:
+        revenue_transaction.append(list(transaction[3]))
+    for i in range(len(revenue_transaction)):
+        revenue_transactions.append(converter(revenue_transaction[i], float))
+    return revenue_transactions
+
+
+def count_transactions_between():
+    list_of_dates = get_date()
+    print("DATE FORMAT: YYYY-MM-DD")
+    date_from = input("Provide date from: ")
+    date_to = input("Provide date to: ")
+    dates = []
+    for i in list_of_dates:
+        if date_from <= i <= date_to:
+            dates.append(i)
+    return len(dates)
+
+
+def sum_transactions_between():
+    list_of_dates = get_date()
+    list_of_prices = get_prices()
+    print("DATE FORMAT: YYYY-MM-DD")
+    date_from = input("Provide date from: ")
+    date_to = input("Provide date to: ")
+    dates = []
+    prices = []
+    for i in list_of_dates:
+        if date_from <= i <= date_to:
+            dates.append(i)
+            index = list_of_dates.index(i)
+            prices.append(list_of_prices[index])
+    return sum(prices)

@@ -33,11 +33,13 @@ def get_biggest_revenue_product():
 
 
 def count_transactions_between():
-    view.print_error_message("Not implemented yet.")
+    count_transactions_between = sales.count_transactions_between()
+    view.print_general_results(count_transactions_between, "Count transactions between given dates.")
 
 
 def sum_transactions_between():
-    view.print_error_message("Not implemented yet.")
+    sum_transactions_between = sales.sum_transactions_between()
+    view.print_general_results(sum_transactions_between, "Sum transactions between given dates.")
 
 
 def run_operation(option):
