@@ -1,29 +1,35 @@
 from model.sales import sales
 from view import terminal as view
+from controller import crud_controller
+
+
+msg = [""]
 
 
 def list_transactions():
-    view.print_error_message("Not implemented yet.")
+    crud_controller.read(sales.DATAFILE, sales.HEADERS, "The list of transactions:")
 
 
 def add_transaction():
-    view.print_error_message("Not implemented yet.")
+    crud_controller.create(sales.DATAFILE, sales.HEADERS, "Add a transaction:")
 
 
 def update_transaction():
-    view.print_error_message("Not implemented yet.")
+    crud_controller.update(sales.DATAFILE, sales.HEADERS, "Update transaction", msg)
 
 
 def delete_transaction():
-    view.print_error_message("Not implemented yet.")
+    crud_controller.delete(sales.DATAFILE, msg)
 
 
 def get_biggest_revenue_transaction():
-    view.print_error_message("Not implemented yet.")
+    revenue_transaction = sales.get_biggest_revenue_transaction()
+    view.print_general_results(revenue_transaction, "Biggest revenue transaction.")
 
 
 def get_biggest_revenue_product():
-    view.print_error_message("Not implemented yet.")
+    revenue_product = sales.get_biggest_revenue_product()
+    view.print_general_results(revenue_product, "Biggest revenue product.")
 
 
 def count_transactions_between():
