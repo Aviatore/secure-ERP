@@ -64,16 +64,11 @@ def values():
     data = crud.read(DATAFILE)
     product_value = []
     product_values = []
-    product_name = []
-    product_names = []
     for product in data:
         product_value.append(list(product[3]))
-        product_name.append(list(product[2]))
     for i in range(len(product_value)):
         product_values.append(converter(product_value[i], float))
-    for i in product_name:
-        product_names.append("".join(i))
-        return product_values
+    return product_values
 
 
 def get_date():
