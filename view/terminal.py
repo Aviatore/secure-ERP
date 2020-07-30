@@ -1,3 +1,6 @@
+from os import system, name, get_terminal_size
+
+
 def print_menu(title, list_options):
     """Prints options in standard menu format like this:
 
@@ -142,3 +145,16 @@ def print_error_message(message):
     """
     print("")
     print(f"Error! {message}")
+
+
+def clear_screen():
+    if name == 'nt':
+        system('cls')
+    else:
+        system('clear')
+
+
+def terminal_size():
+    size = get_terminal_size()
+    
+    return (size.lines, size.columns)
