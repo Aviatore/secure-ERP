@@ -7,27 +7,42 @@ msg = [""]
 
 
 def list_transactions():
+    view.clear_screen()
+
     crud_controller.read(sales.DATAFILE, sales.HEADERS, "The list of transactions:")
 
 
 def add_transaction():
     crud_controller.create(sales.DATAFILE, sales.HEADERS, "Add a transaction:")
 
+    input("\nPress ENTER to continue ...")
+    view.clear_screen()
+
 
 def update_transaction():
     crud_controller.update(sales.DATAFILE, sales.HEADERS, "Update transaction", msg)
+
+    input("\nPress ENTER to continue ...")
+    view.clear_screen()
 
 
 def delete_transaction():
     crud_controller.delete(sales.DATAFILE, msg)
 
+    input("\nPress ENTER to continue ...")
+    view.clear_screen()
+
 
 def get_biggest_revenue_transaction():
+    view.clear_screen()
+
     revenue_transaction = sales.get_biggest_revenue_transaction()
     view.print_general_results(revenue_transaction, "Biggest revenue transaction.")
 
 
 def get_biggest_revenue_product():
+    view.clear_screen()
+
     revenue_product = sales.get_biggest_revenue_product()
     view.print_general_results(revenue_product, "Biggest revenue product.")
 
@@ -36,10 +51,16 @@ def count_transactions_between():
     count_transactions_between = sales.count_transactions_between()
     view.print_general_results(count_transactions_between, "Count transactions between given dates.")
 
+    input("\nPress ENTER to continue ...")
+    view.clear_screen()
+
 
 def sum_transactions_between():
     sum_transactions_between = sales.sum_transactions_between()
     view.print_general_results(sum_transactions_between, "Sum transactions between given dates.")
+
+    input("\nPress ENTER to continue ...")
+    view.clear_screen()
 
 
 def run_operation(option):

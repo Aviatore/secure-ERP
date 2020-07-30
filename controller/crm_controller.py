@@ -7,25 +7,33 @@ msg = [""]
 
 def list_customers():
     view.clear_screen()
-    crud_controller.read(crm.DATAFILE, crm.HEADERS, "The list of customers:")
+    crud_controller.read(crm.DATAFILE, crm.HEADERS, "The list of customers")
 
 
 def add_customer():
+    crud_controller.create(crm.DATAFILE, crm.HEADERS, "Add a customer")
+    
+    input("\nPress ENTER to continue ...")
     view.clear_screen()
-    crud_controller.create(crm.DATAFILE, crm.HEADERS, "Add a customer:")
 
 
 def update_customer():
-    view.clear_screen()
     crud_controller.update(crm.DATAFILE, crm.HEADERS, "Update customer", msg)
+    
+    input("\nPress ENTER to continue ...")
+    view.clear_screen()
 
 
 def delete_customer():
     crud_controller.delete(crm.DATAFILE, msg)
+    
+    input("\nPress ENTER to continue ...")
+    view.clear_screen()
 
 
 def get_subscribed_emails():
     view.clear_screen()
+    
     emails = crm.get_subscribed_emails()
     view.print_general_results(emails, "Subscribed emails")
 

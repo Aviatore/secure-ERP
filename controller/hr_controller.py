@@ -6,41 +6,63 @@ msg = [""]
 
 
 def list_employees():
+    view.clear_screen()
+    
     crud_controller.read(hr.DATAFILE, hr.HEADERS, "The list of employees:")
 
 
 def add_employee():
     crud_controller.create(hr.DATAFILE, hr.HEADERS, "Add a employee:")
+    
+    input("\nPress ENTER to continue ...")
+    view.clear_screen()
 
 
 def update_employee():
     crud_controller.update(hr.DATAFILE, hr.HEADERS, "Update employee", msg)
+    
+    input("\nPress ENTER to continue ...")
+    view.clear_screen()
 
 
 def delete_employee():
     crud_controller.delete(hr.DATAFILE, msg)
+    
+    input("\nPress ENTER to continue ...")
+    view.clear_screen()
 
 
 def get_oldest_and_youngest():
+    view.clear_screen()
+
     birthday = hr.get_oldest_and_youngest()
     view.print_general_results(birthday, "Oldest and youngest employees")
 
 
 def get_average_age():
+    view.clear_screen()
+
     age = hr.get_average_age()
     view.print_general_results(age, "Average age of employees")
 
 
 def next_birthdays():
+    view.clear_screen()
+
     view.print_error_message("Not implemented yet.")
 
 
 def count_employees_with_clearance():
     number_of_employees = hr.count_employees_with_clearance()
     view.print_general_results(number_of_employees, "Number of employees with at least given lvl of Clearance")
+    
+    input("\nPress ENTER to continue ...")
+    view.clear_screen()
 
 
 def count_employees_per_department():
+    view.clear_screen()
+
     view.print_error_message("Not implemented yet.")
 
 
@@ -84,9 +106,17 @@ def display_menu():
 
 
 def menu():
+    global msg
+
     operation = None
     while operation != '0':
         display_menu()
+
+        if msg[0] != "":
+            print("")
+            print(msg[0])
+            msg[0] = ""
+
         try:
             operation = view.get_input("Select an operation")
             run_operation(int(operation))

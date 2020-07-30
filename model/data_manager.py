@@ -27,7 +27,12 @@ def write_table_to_file(file_name, table, separator=';'):
         table: list of lists containing tabular data.
         separator: The CSV separator character
     """
-    with open(file_name, "w") as file:
-        for record in table:
-            row = separator.join(record)
-            file.write(row + "\n")
+    try:
+        with open(file_name, "w") as file:
+            for record in table:
+                row = separator.join(record)
+                file.write(row + "\n")
+            
+            print(f"Your database was updated successfully.")
+    except:
+        print(f"Error! Something went wrong while writing to the file: '{file_name}'.")

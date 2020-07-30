@@ -26,9 +26,11 @@ def display_menu():
 def menu():
     option = None
     while option != '0':
+        view.clear_screen()
         display_menu()
         try:
             option = view.get_input("Select module")
+            view.clear_screen()
             load_module(int(option))
         except KeyError:
             view.print_error_message("There is no such option!")
