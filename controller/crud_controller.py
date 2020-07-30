@@ -30,14 +30,11 @@ def get_data_lp(data, action_type, msg=[""]):
     if customer_lp == "":
         msg[0] = "You must provide a digit."
         return None
-
     elif customer_lp == "c":
         return None
-
     elif not customer_lp.isdigit():
         msg[0] = "You must provide a digit."
         return None
-
     else:
         customer_lp = int(customer_lp)
         
