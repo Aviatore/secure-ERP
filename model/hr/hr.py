@@ -95,3 +95,27 @@ def count_employees_with_clearance():
             number_of_employees += 1
 
     return number_of_employees
+
+
+def get_birthday():
+    data = crud.read(DATAFILE)
+    
+    birthdays = {}
+    
+    for line in data:
+        birthdays[line[1]] = list(map(int, line[2].split("-")))
+    
+    return birthdays
+
+
+def is_leap_year(year):    
+    if year % 4 == 0:
+        if year % 100 == 0:
+            if year % 400 == 0:
+                return True
+            else:
+                return False
+        else:
+            return True
+    else:
+        return False
