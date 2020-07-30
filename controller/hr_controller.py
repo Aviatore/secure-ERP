@@ -46,10 +46,53 @@ def get_average_age():
     view.print_general_results(age, "Average age of employees")
 
 
-def next_birthdays():
-    view.clear_screen()
+def the_date_difference_is_lesser_than_14(date1, date2):
+    YEAR_INDEX = 0
+    MONTH_INDEX = 1
+    DAY_INDEX = 2
+    days_count = 0
+    days_in_the_months_normal_year = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+    days_in_the_months_leap_year = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+    
+    if date1[YEAR_INDEX] == date2[YEAR_INDEX]:
+        if hr.is_leap_year(date1[YEAR_INDEX]):
+            days_in_the_months = days_in_the_months_leap_year
+        else:
+            days_in_the_months = days_in_the_months_normal_year
+    else:
+        return False
+    
+    if date2[MONTH_INDEX] == date1[MONTH_INDEX] and date2[DAY_INDEX] > date1[DAY_INDEX]:
+        days_count += date2[DAY_INDEX] - date1[DAY_INDEX]
+    elif date2[MONTH_INDEX] - date1[MONTH_INDEX] == 1 and date2[DAY_INDEX] < date1[DAY_INDEX]:
+        days_count += days_in_the_months[date1[MONTH_INDEX] - 1] - date1[DAY_INDEX]
+        days_count += date2[DAY_INDEX]
+    
+    if days_count <= 14:
+        return True
+    else:
+        return False
 
-    view.print_error_message("Not implemented yet.")
+
+def next_birthdays():
+    birthdays = hr.get_birthday()
+    
+    input_date = view.get_input("Please, give a date [YYYY-MM-DD]")
+    input_date_list = list(map(int, input_date.split("-")))
+    
+    employees_with_birthdays = []
+    
+    for name in birthdays.keys():
+        if the_date_difference_is_lesser_than_14(birthdays[name], input_date_list):
+            employees_with_birthdays.append(name)
+    
+    if len(employees_with_birthdays) == 0:
+        view.print_message("There is no emplyees having birthdays within the two weeks.")
+    else:
+        view.print_general_results(employees_with_birthdays, "Employees having birthdays within the two weeks")
+    
+    input("\nPress ENTER to continue ...")
+    view.clear_screen()
 
 
 def count_employees_with_clearance():
